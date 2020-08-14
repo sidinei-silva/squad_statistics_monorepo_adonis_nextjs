@@ -6,7 +6,8 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ]
+    ],
+    "nohoist": ["**/@adonisjs", "**/@adonisjs/**"]
   },
   "author": "Sidinei Silva <sidinei.silva02@gmail.com>",
   "license": "MIT"
