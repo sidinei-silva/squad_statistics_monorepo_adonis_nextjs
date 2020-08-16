@@ -1,24 +1,25 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/core/styles'
-import Head from 'next/head'
-import React from 'react'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Head from 'next/head';
+import React from 'react';
 
-import theme from '../styles/theme'
-import '../styles/globals.css'
+import Snackbar from '../src/components/Snackbar';
+import theme from '../styles/theme';
+import '../styles/globals.css';
 
 interface IMyApp {
-  Component: React.ComponentType<any>
-  pageProps: React.Props<any>
+  Component: React.ComponentType<any>;
+  pageProps: React.Props<any>;
 }
 
 function MyApp({ Component, pageProps }: IMyApp): JSX.Element {
   React.useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side')
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles)
+      jssStyles.parentElement.removeChild(jssStyles);
     }
-  }, [])
+  }, []);
 
   return (
     <React.Fragment>
@@ -32,10 +33,12 @@ function MyApp({ Component, pageProps }: IMyApp): JSX.Element {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <Snackbar>
+          <Component {...pageProps} />
+        </Snackbar>
       </ThemeProvider>
     </React.Fragment>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

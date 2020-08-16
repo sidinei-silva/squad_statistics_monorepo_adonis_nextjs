@@ -6,12 +6,12 @@ module.exports = {
     jest: true
   },
   extends: [
-    'prettier/react',
-    'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
+    'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'airbnb-base',
+    'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'prettier/react',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -70,5 +70,8 @@ module.exports = {
     react: {
       version: 'detect'
     }
+  },
+  "globals": {
+    "use": true
   }
 }
