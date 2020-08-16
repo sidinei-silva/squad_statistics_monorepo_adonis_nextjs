@@ -70,5 +70,8 @@ module.exports = {
     react: {
       version: 'detect'
     }
+  },
+  "globals": {
+    "use": true
   }
 }
