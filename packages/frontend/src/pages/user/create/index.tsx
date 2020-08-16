@@ -18,6 +18,7 @@ import {
   VisibilityOff,
   Lock,
 } from '@material-ui/icons';
+import Api from '@squad_statistics_monorepo/axios-config';
 import { Formik, Form, FormikProps } from 'formik';
 import Head from 'next/head';
 import React from 'react';
@@ -67,9 +68,17 @@ const Cadastrar: React.FC = () => {
                     email: '',
                   }}
                   validationSchema={userSchema}
-                  onSubmit={async (values) => {
+                  onSubmit={async (values, { setFieldError }) => {
                     await new Promise((resolve) => setTimeout(resolve, 500));
-                    alert(JSON.stringify(values, null, 2));
+                    await Api.post('/register', {
+                      ...values,
+                    })
+                      .then((response) => {
+                        console.log({ response });
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      });
                   }}
                 >
                   {(props: FormikProps<ISignUpForm>) => {
