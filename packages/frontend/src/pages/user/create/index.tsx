@@ -23,6 +23,7 @@ import Head from 'next/head';
 import React from 'react';
 
 import useStyles from './styles';
+import userSchema from './yupValidationSchema';
 
 interface ISignUpForm {
   username: string;
@@ -65,6 +66,7 @@ const Cadastrar: React.FC = () => {
                     password: '',
                     email: '',
                   }}
+                  validationSchema={userSchema}
                   onSubmit={async (values) => {
                     await new Promise((resolve) => setTimeout(resolve, 500));
                     alert(JSON.stringify(values, null, 2));
