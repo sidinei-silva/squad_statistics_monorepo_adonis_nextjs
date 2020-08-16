@@ -10,6 +10,7 @@ import {
   InputAdornment,
   IconButton,
   Link,
+  Snackbar,
 } from '@material-ui/core/';
 import {
   AccountCircle,
@@ -21,6 +22,7 @@ import {
 import Api from '@squad_statistics_monorepo/axios-config';
 import { Formik, Form, FormikProps } from 'formik';
 import Head from 'next/head';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 
 import useStyles from './styles';
@@ -34,6 +36,7 @@ interface ISignUpForm {
 
 const Cadastrar: React.FC = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [passwordIsVisible, setPasswordIsVisible] = React.useState(false);
 
@@ -77,7 +80,33 @@ const Cadastrar: React.FC = () => {
                         console.log({ response });
                       })
                       .catch((error) => {
-                        console.log(error);
+                        if (error.response) {
+                          // client received an error response (5xx, 4xx)
+                          error.response.data.forEach((err) => {
+                            if (err.field === 'username') {
+                              setFieldError('username', err.message);
+                            }
+                            if (err.field === 'email') {
+                              setFieldError('email', err.message);
+                            }
+                            if (err.field === 'password') {
+                              setFieldError('password', err.message);
+                            }
+
+                            enqueueSnackbar(err.message, {
+                              variant: 'error',
+                            });
+                          });
+                        } else if (error.request) {
+                          // client never received a response, or request never left
+                          enqueueSnackbar(error.message, {
+                            variant: 'error',
+                          });
+                        } else {
+                          enqueueSnackbar('Erro ao executar ação', {
+                            variant: 'error',
+                          });
+                        }
                       });
                   }}
                 >

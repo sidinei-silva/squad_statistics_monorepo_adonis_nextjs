@@ -13,6 +13,7 @@
     "@squad_statistics_monorepo/axios-config": "*",
     "formik": "^2.1.5",
     "next": "9.5.2",
+    "notistack": "^0.9.17",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "yup": "^0.29.3"
