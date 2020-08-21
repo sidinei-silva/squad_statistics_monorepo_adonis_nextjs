@@ -16,4 +16,6 @@ const Route = use('Route');
 
 Route.post('/register', 'UserController.create').validator('StoreUser');
 
-Route.get('/', () => ({ greeting: 'Hello world in JSON' }));
+Route.post('/login', 'SessionController.create').validator('StoreSession');
+
+Route.get('/', () => ({ greeting: 'Hello world in JSON' })).middleware('auth');
